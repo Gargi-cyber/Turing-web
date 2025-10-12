@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 export const config = {
-  frontendOrigin: process.env.FRONTEND_ORIGIN || "https://turing-web-ssgt.vercel.app/Frontend",
+  frontendOrigin: process.env.FRONTEND_ORIGIN || "https://turing-web-ssgt.vercel.app",
   google: {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
