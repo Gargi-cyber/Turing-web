@@ -1,0 +1,4 @@
+{
+  "ignore": ["db.json"],
+  "watch": ["server.js", "routes", "config", "utils", "middleware"]
+}
