@@ -137,11 +137,11 @@ async function fetchMe() {
       }
     } else {
       // not logged in — redirect to login
-      window.location.href = 'https://turing-web-version.vercel.app/index.html';
+      window.location.href = 'https://turing-web-version.vercel.app';
     }
   } catch (err) {
     console.error('fetchMe error', err);
-    window.location.href = 'https://turing-web-version.vercel.app/index.html';
+    window.location.href = 'https://turing-web-version.vercel.app';
   }
 }
 
@@ -153,6 +153,6 @@ async function logout() {
     method: 'POST',
     credentials: 'include'
   });
-  window.location.href = 'https://turing-web-version.vercel.app/index.html';
+  window.location.href = 'https://turing-web-version.vercel.app';
 }
 document.querySelector('.profile_logout')?.addEventListener('click', logout);
