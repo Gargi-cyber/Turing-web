@@ -332,10 +332,10 @@ canvas {
     transform-style: preserve-3d;
     transition: transform 0.35s cubic-bezier(0.83, 0, 0.17, 1), box-shadow 0.35s cubic-bezier(0.83, 0, 0.17, 1);
 }
-.chat {
+/* .chat {
     display: flex;
     flex-direction: row;
-}
+} */
 .input_mic {
     position: relative;
     bottom: 0;
