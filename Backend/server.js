@@ -1,21 +1,24 @@
 import express from 'express';
+import passport from 'passport';
+import session from 'express-session';
+import authRoutes from './Routes/auth.js';
+import apiRoutes from './Routes/api.js';
+import path from "path";
+
+const app = express();
+
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import passport from 'passport';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 
 import { config } from './Config/env.js';
 import './Config/passport.js';
-import authRoutes from './Routes/auth.js';
-import apiRoutes from './Routes/api.js';
+
 
 console.log('[CONFIG] google config:', config.google);
 
-import path from "path";
 const __dirname = path.resolve();
-
-const app = express();
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`Server running on ${PORT}`));
@@ -39,14 +42,14 @@ app.use(passport.initialize());
 
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
-// app.use(express.static("../Frontend"));
-
+app.use(express.static(path.join(process.cwd(), "../Frontend")));
 
 // healthcheck
 app.get('/', (req, res) => res.send('Backend running'));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../Frontend', 'main.html'));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(process.cwd(), "../Frontend/main.html"));
 });
 
-app.listen(PORT, () => console.log(`Server listening on https://turing-web-version.up.railway.app/`));
+
+app.listen(process.env.PORT || 8080, () => console.log("Server running"));
