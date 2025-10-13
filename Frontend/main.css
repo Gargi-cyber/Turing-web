@@ -550,7 +550,6 @@ canvas {
 
 .messages::-webkit-scrollbar {
     width: 8px;
-    display: none;
 }
 
 .messages::-webkit-scrollbar-track {
