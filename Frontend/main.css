@@ -556,13 +556,18 @@ canvas {
     background: transparent;
     filter: blur(1.5px);
     border-radius: 10px;
+    padding: 2px;
 }
 
 .messages::-webkit-scrollbar-thumb {
-    background: rgba(250, 242, 242, 0.3);
+    background: transparent;
     border-radius: 10px;
+    margin-top: 2px;
+    margin-bottom: 15px;
+    filter: blur(5px);
+    box-shadow: rgba(0, 0, 0, 0.2);
 }
 
 .messages::-webkit-scrollbar-thumb:hover {
-    background: rgba(250, 242, 242, 0.5);
+    background: rgba(250, 242, 242, 0.3);
 }
