@@ -549,15 +549,16 @@ canvas {
     width: 8px;
 }
 .no-scrollbar::-webkit-scrollbar {
-  display: block;
+    display: block;
+    padding-top: 2px;
+    padding-bottom: 5px;
+    margin-top: 5px;
 }
 
 .messages::-webkit-scrollbar-track {
     background: rgba(0, 0, 0, 0.1);
-    filter: blur(1.5px);
+    filter: blur(5px);
     border-radius: 10px;
-    padding-top: 2px;
-    padding-bottom: 5px;
 }
 
 .messages::-webkit-scrollbar-thumb {
