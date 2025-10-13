@@ -10,6 +10,9 @@ import './Config/passport.js';
 import authRoutes from './Routes/auth.js';
 import apiRoutes from './Routes/api.js';
 
+import path from "path";
+const __dirname = path.resolve();
+
 const app = express();
 
 const PORT = process.env.PORT || 8080;
@@ -34,9 +37,14 @@ app.use(passport.initialize());
 
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
-// app.use(express.static("../Frontend"));
+app.use(express.static("../Frontend"));
+
 
 // healthcheck
 app.get('/', (req, res) => res.send('Backend running'));
 
-app.listen(config.PORT, () => console.log(`Server listening on https://turing-web-version.up.railway.app/`));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../Frontend', 'main.html'));
+});
+
+app.listen(PORT, () => console.log(`Server listening on https://turing-web-version.up.railway.app/`));
