@@ -24,10 +24,6 @@ canvas {
   -webkit-mask-mode: alpha;
 }
 
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
 .logo {
     display: flex;
     flex-direction: row;
@@ -551,6 +547,10 @@ canvas {
 
 .messages::-webkit-scrollbar {
     width: 8px;
+    display: block;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 .messages::-webkit-scrollbar-track {
