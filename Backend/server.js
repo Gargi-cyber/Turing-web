@@ -31,7 +31,7 @@ app.get('/', (req, res) => res.send('Backend running'));
 
 // serve frontend *after* everything else
 const frontendPath = path.join(process.cwd(), "../Frontend");
-app.use(express.static(frontendPath));
+app.use('/Frontend', express.static(frontendPath));
 
 // only send frontend for non-API routes
 app.get(/^(?!\/(api|auth)\/).*/, (req, res) => {
