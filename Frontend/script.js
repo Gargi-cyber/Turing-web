@@ -217,7 +217,6 @@ function addMessage(content, type = 'user') {
     return messageDiv;
 }
 
-let no-scrollbar = document.getElementbyClass('no-scrollbar');
 Messages.addEventListener('scroll', ()=>{
   Messages.classList.remove('no-scrollbar');
   clearTimeout(scrollTimeout);
