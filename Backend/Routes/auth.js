@@ -44,11 +44,13 @@ router.get('/google/callback', (req, res, next) => {
     const payload = { sub: user.id, name: user.displayName, email: user.email };
     const token = jwt.sign(payload, config.jwt.secret, { expiresIn: config.jwt.expiresIn });
 
+    // CRITICAL: Cookie settings for cross-origin
     res.cookie('token', token, {
       httpOnly: true,
-      secure: (process.env.NODE_ENV === 'production'),
-      sameSite: 'lax',
-      maxAge: 1000 * 60 * 60 * 24 * 7 // 7 days
+      secure: true, // Always true in production
+      sameSite: 'none', // CHANGED: Must be 'none' for cross-origin cookies
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+      domain: '.vercel.app' // ADDED: Share cookie with frontend subdomain
     });
 
     // redirect to frontend
@@ -58,7 +60,12 @@ router.get('/google/callback', (req, res, next) => {
 
 // logout endpoint to clear cookie
 router.post('/logout', (req, res) => {
-  res.clearCookie('token', { httpOnly: true, sameSite: 'lax', secure: (process.env.NODE_ENV === 'production') });
+  res.clearCookie('token', { 
+    httpOnly: true, 
+    sameSite: 'none', 
+    secure: true,
+    domain: '.vercel.app'
+  });
   res.json({ ok: true });
 });
 
