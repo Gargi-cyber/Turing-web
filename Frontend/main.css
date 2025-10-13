@@ -319,8 +319,9 @@ canvas {
     width: 80%;
     height: 15%;
     margin: 20px;
+    padding: 10px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 10;
@@ -332,10 +333,10 @@ canvas {
     transform-style: preserve-3d;
     transition: transform 0.35s cubic-bezier(0.83, 0, 0.17, 1), box-shadow 0.35s cubic-bezier(0.83, 0, 0.17, 1);
 }
-/* .chat {
+.chat {
     display: flex;
     flex-direction: row;
-} */
+}
 .input_mic {
     position: relative;
     bottom: 0;
@@ -366,7 +367,7 @@ canvas {
     padding-left: 20px;
     padding-right: 20px;
     height: 50px;
-    max-height: 180px;
+    max-height: 120px;
     min-width: 60%;
     border-radius: 15px;
     outline: none;
@@ -381,7 +382,22 @@ canvas {
     line-height: 1.5;
 }
 .text_box::-webkit-scrollbar {
-  display: none; /* Hides the scrollbar */
+    width: 8px;
+}
+
+.text_box::-webkit-scrollbar-track {
+    background: transparent;
+    filter: blur(1.5px);
+    border-radius: 10px;
+}
+
+.text_box::-webkit-scrollbar-thumb {
+    background: rgba(250, 242, 242, 0.3);
+    border-radius: 10px;
+}
+
+.text_box::-webkit-scrollbar-thumb:hover {
+    background: rgba(250, 242, 242, 0.5);
 }
 .send_button {
     position: relative;
@@ -458,13 +474,14 @@ canvas {
 
 /* Chat Messages Display Area */
 .messages {
-    position: absolute;
+    position: relative;
     bottom: 18%;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    /* transform: translateX(-50%); */
     width: 75%;
     max-height: 50vh;
     overflow-y: auto;
+    margin: 10px;
     padding: 20px;
     border-radius: 15px;
     background: rgba(255, 255, 255, 0.05);
@@ -537,15 +554,16 @@ canvas {
 }
 
 .messages::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
+    background: transparent;
+    filter: blur(1.5px);
     border-radius: 10px;
 }
 
 .messages::-webkit-scrollbar-thumb {
-    background: rgba(100, 150, 255, 0.3);
+    background: rgba(250, 242, 242, 0.3);
     border-radius: 10px;
 }
 
 .messages::-webkit-scrollbar-thumb:hover {
-    background: rgba(100, 150, 255, 0.5);
+    background: rgba(250, 242, 242, 0.5);
 }
