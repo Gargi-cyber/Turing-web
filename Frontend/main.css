@@ -549,7 +549,7 @@ canvas {
     width: 8px;
 }
 .no-scrollbar::-webkit-scrollbar {
-  display: none;
+  display: block;
 }
 
 .messages::-webkit-scrollbar-track {
