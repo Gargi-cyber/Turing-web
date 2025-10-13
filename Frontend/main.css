@@ -24,6 +24,9 @@ canvas {
   -webkit-mask-mode: alpha;
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
 
 .logo {
     display: flex;
