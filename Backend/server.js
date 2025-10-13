@@ -20,8 +20,7 @@ console.log('[CONFIG] google config:', config.google);
 
 const __dirname = path.resolve();
 
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => console.log(`Server running on ${PORT}`));
+const PORT = process.env.PORT || 8080
 
 app.use(helmet());
 app.use(express.json());
