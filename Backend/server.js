@@ -29,10 +29,13 @@ app.use('/api', apiRoutes);
 // healthcheck
 app.get('/', (req, res) => res.send('Backend running'));
 
-app.use(express.static(path.join(process.cwd(), "../Frontend")));
+// serve frontend *after* everything else
+const frontendPath = path.join(process.cwd(), "../Frontend");
+app.use(express.static(frontendPath));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(process.cwd(), "../Frontend/main.html"));
+// only send frontend for non-API routes
+app.get(/^(?!\/(api|auth)\/).*/, (req, res) => {
+  res.sendFile(path.join(frontendPath, "main.html"));
 });
 
 const PORT = process.env.PORT || 8080
