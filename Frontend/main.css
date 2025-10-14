@@ -615,6 +615,26 @@ canvas {
     font-size: 28px;
     margin: 0;
 }
+.tech img {
+    height: 5px;
+    width: 5px;
+}
+.apple img {
+    height: 5px;
+    width: 5px;
+}
+.tesla img {
+    height: 5px;
+    width: 5px;
+}
+.business img {
+    height: 5px;
+    width: 5px;
+}
+.jane img {
+    height: 5px;
+    width: 5px;
+}
 
 .news_close {
     background: none;
