@@ -386,3 +386,50 @@ function displayNews(articles) {
         `;
     }).join('');
 }
+
+
+const tech = document.querySelector('.tech');
+const apple = document.querySelector('.apple');
+const tesla = document.querySelector('.tesla');
+const business = document.querySelector('.business');
+const jane = document.querySelector('.jane');
+
+tech.addEventListener('click', () => {
+  tech.style.boxShadow = "rgba(0,0,0,0.25) 1px 1px 5px 2px";
+  apple.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+  tesla.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+  business.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+  jane.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+});
+
+apple.addEventListener('click', () => {
+  apple.style.boxShadow = "rgba(0,0,0,0.25) 1px 1px 5px 2px";
+  tech.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+  tesla.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+  business.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+  jane.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+});
+
+tesla.addEventListener('click', () => {
+  tesla.style.boxShadow = "rgba(0,0,0,0.25) 1px 1px 5px 2px";
+  tech.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+  apple.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+  business.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+  jane.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+});
+
+business.addEventListener('click', () => {
+  business.style.boxShadow = "rgba(0,0,0,0.25) 1px 1px 5px 2px";
+  tech.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+  apple.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+  tesla.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+  jane.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+});
+
+jane.addEventListener('click', () => {
+  jane.style.boxShadow = "rgba(0,0,0,0.25) 1px 1px 5px 2px";
+  tech.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+  apple.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+  tesla.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+  business.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+});
