@@ -42,8 +42,9 @@ router.post('/chat', requireAuth, async (req, res) => {
 
 router.get('/news', requireAuth, async (req, res) => {
   try {
-    console.log('[NEWS] Fetching top headlines');
-    const result = await getTopHeadlines();
+    const source = req.query.source || 'tech';
+    console.log(`[NEWS] Fetching top headlines for source: ${source}`);
+    const result = await getTopHeadlines(source);
     
     if (result.success) {
       res.json({ articles: result.articles });
