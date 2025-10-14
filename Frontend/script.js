@@ -23,7 +23,7 @@ const newsPanel = document.getElementById('newsPanel');
 const newsClose = document.getElementById('newsClose');
 const newsArticlesContainer = document.getElementById('newsArticles');
 const newsButton = document.querySelector('.news');
-
+let currentNewsSource = 'tech';
 const tech = document.querySelector('.tech');
 const apple = document.querySelector('.apple');
 const tesla = document.querySelector('.tesla');
@@ -336,7 +336,9 @@ newsButton.addEventListener('click', async () => {
     Messages.style.display = 'none';
   }
   newsPanel.classList.add('active');
-  await loadNews();
+  currentNewsSource = 'tech';
+  setActiveTab('tech');
+  await loadNews('tech');
 });
 
 // Close news Panel
@@ -361,13 +363,13 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-async function loadNews() {
-    newsArticlesContainer.innerHTML = '<div class="news_loading">Loading latest tech news...</div>';
+async function loadNews(source = 'tech') {
+    newsArticlesContainer.innerHTML = '<div class="news_loading">Refreshing news...</div>';
     
     try {
         const token = localStorage.getItem('authToken');
         
-        const response = await fetch('https://turing-web-version.up.railway.app/api/news', {
+        const response = await fetch(`https://turing-web-version.up.railway.app/api/news?source=${source}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -407,7 +409,7 @@ function displayNews(articles) {
                 <div class="news_article_title">${article.title}</div>
                 ${article.description ? `<div class="news_article_description">${article.description}</div>` : ''}
                 <div class="news_article_meta">
-                    <span class="news_article_author">${article.author || 'TechCrunch'}</span>
+                    <span class="news_article_author">${article.author || article.source || 'Unknown'}</span>
                     <span class="news_article_date">${date}</span>
                 </div>
             </div>
@@ -415,47 +417,50 @@ function displayNews(articles) {
     }).join('');
 }
 
+function setActiveTab(tabName) {
+    // Reset all tabs
+    tech.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+    apple.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+    tesla.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+    business.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+    jane.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+    
+    // Set active tab
+    const tabs = { tech, apple, tesla, business, jane };
+    if (tabs[tabName]) {
+        tabs[tabName].style.boxShadow = "rgba(0,0,0,0.25) 1px 1px 5px 2px";
+    }
+}
 
 
-
-tech.addEventListener('click', () => {
-  tech.style.boxShadow = "rgba(0,0,0,0.25) 1px 1px 5px 2px";
-  apple.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
-  tesla.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
-  business.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
-  jane.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+tech.addEventListener('click', async () => {
+    setActiveTab('tech');
+    currentNewsSource = 'tech';
+    await loadNews('tech');
 });
 
-apple.addEventListener('click', () => {
-  apple.style.boxShadow = "rgba(0,0,0,0.25) 1px 1px 5px 2px";
-  tech.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
-  tesla.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
-  business.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
-  jane.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+apple.addEventListener('click', async () => {
+    setActiveTab('apple');
+    currentNewsSource = 'apple';
+    await loadNews('apple');
 });
 
-tesla.addEventListener('click', () => {
-  tesla.style.boxShadow = "rgba(0,0,0,0.25) 1px 1px 5px 2px";
-  tech.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
-  apple.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
-  business.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
-  jane.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+tesla.addEventListener('click', async () => {
+    setActiveTab('tesla');
+    currentNewsSource = 'tesla';
+    await loadNews('tesla');
 });
 
-business.addEventListener('click', () => {
-  business.style.boxShadow = "rgba(0,0,0,0.25) 1px 1px 5px 2px";
-  tech.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
-  apple.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
-  tesla.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
-  jane.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+business.addEventListener('click', async () => {
+    setActiveTab('business');
+    currentNewsSource = 'business';
+    await loadNews('business');
 });
 
-jane.addEventListener('click', () => {
-  jane.style.boxShadow = "rgba(0,0,0,0.25) 1px 1px 5px 2px";
-  tech.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
-  apple.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
-  tesla.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
-  business.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
+jane.addEventListener('click', async () => {
+    setActiveTab('jane');
+    currentNewsSource = 'janestreet';
+    await loadNews('janestreet');
 });
 
 
