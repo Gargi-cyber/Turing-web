@@ -3,6 +3,33 @@ const ctx = canvas.getContext("2d");
 let w, h, t = 0;
 let mouseX = 0, mouseY = 0, react = 0;
 
+let stocks = document.getElementsByClassName("stocks")[0]
+let news = document.getElementsByClassName("news")[0]
+let weather = document.getElementsByClassName("weather")[0]
+let extensions = document.getElementsByClassName("extensions")[0]
+let profile_pic = document.getElementsByClassName("profile_pic")[0]
+let profile_logout = document.getElementsByClassName("profile_logout")[0]
+let stocks_text = document.getElementsByClassName("stocks_text")[0]
+let news_text = document.getElementsByClassName("news_text")[0]
+let weather_text = document.getElementsByClassName("weather_text")[0]
+let extensions_text = document.getElementsByClassName("extensions_text")[0]
+
+const Messages = document.getElementById('Messages');
+const messageInput = document.getElementById('messageInput');
+const sendButton = document.getElementById('sendButton');
+let conversationHistory = [];
+
+const newsPanel = document.getElementById('newsPanel');
+const newsClose = document.getElementById('newsClose');
+const newsArticlesContainer = document.getElementById('newsArticles');
+const newsButton = document.querySelector('.news');
+
+const tech = document.querySelector('.tech');
+const apple = document.querySelector('.apple');
+const tesla = document.querySelector('.tesla');
+const business = document.querySelector('.business');
+const jane = document.querySelector('.jane');
+
 function resize() {
   w = canvas.width = innerWidth;
   h = canvas.height = innerHeight;
@@ -53,16 +80,7 @@ function draw() {
 draw();
 
 
-let stocks = document.getElementsByClassName("stocks")[0]
-let news = document.getElementsByClassName("news")[0]
-let weather = document.getElementsByClassName("weather")[0]
-let extensions = document.getElementsByClassName("extensions")[0]
-let profile_pic = document.getElementsByClassName("profile_pic")[0]
-let profile_logout = document.getElementsByClassName("profile_logout")[0]
-let stocks_text = document.getElementsByClassName("stocks_text")[0]
-let news_text = document.getElementsByClassName("news_text")[0]
-let weather_text = document.getElementsByClassName("weather_text")[0]
-let extensions_text = document.getElementsByClassName("extensions_text")[0]
+
 
 
 stocks.addEventListener("mouseover", ()=>{
@@ -202,10 +220,7 @@ document.querySelector('.profile_logout')?.addEventListener('click', logout);
 
 
 // Chat functionality
-const Messages = document.getElementById('Messages');
-const messageInput = document.getElementById('messageInput');
-const sendButton = document.getElementById('sendButton');
-let conversationHistory = [];
+
 
 function addMessage(content, type = 'user') {
     const messageDiv = document.createElement('div');
@@ -283,6 +298,12 @@ async function sendMessage() {
     }
 }
 
+sendButton.addEventListener('click', () => {
+  newsPanel.classList.remove('active');
+  if (Messages.classList.contains('active')) {
+    Messages.style.display('block');
+  }
+});
 // Send on button click
 sendButton.addEventListener('click', sendMessage);
 
@@ -307,10 +328,7 @@ messageInput.addEventListener('input', function() {
 
 
 // News Modal functionality
-const newsPanel = document.getElementById('newsPanel');
-const newsClose = document.getElementById('newsClose');
-const newsArticlesContainer = document.getElementById('newsArticles');
-const newsButton = document.querySelector('.news');
+
 
 // Open news Panel
 newsButton.addEventListener('click', async () => {
@@ -398,11 +416,7 @@ function displayNews(articles) {
 }
 
 
-const tech = document.querySelector('.tech');
-const apple = document.querySelector('.apple');
-const tesla = document.querySelector('.tesla');
-const business = document.querySelector('.business');
-const jane = document.querySelector('.jane');
+
 
 tech.addEventListener('click', () => {
   tech.style.boxShadow = "rgba(0,0,0,0.25) 1px 1px 5px 2px";
@@ -444,9 +458,4 @@ jane.addEventListener('click', () => {
   business.style.boxShadow = "rgba(0,0,0,0) 1px 1px 5px 2px";
 });
 
-sendButton.addEventListener('click', () => {
-  if (Messages.classList.contains('active')) {
-    Messages.style.display('block');
-  }
-  newsPanel.classList.remove('active');
-});
+
