@@ -301,7 +301,7 @@ async function sendMessage() {
 sendButton.addEventListener('click', () => {
   newsPanel.classList.remove('active');
   if (Messages.classList.contains('active')) {
-    Messages.style.display('block');
+    Messages.style.display = 'block';
   }
 });
 // Send on button click
