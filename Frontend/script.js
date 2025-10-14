@@ -163,7 +163,7 @@ async function fetchMe() {
       
       // Update greeting
       if (document.querySelector('.greeting')) {
-        document.querySelector('.greeting').textContent = `Hello ${user.displayName.split(' ')[0]}!`;
+        document.querySelector('.greeting').textContent = `Hello ${user.displayName.split(' ')[0]} !`;
       }
     } else {
       console.log('Auth failed, clearing token and redirecting');
