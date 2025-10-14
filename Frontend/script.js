@@ -292,6 +292,9 @@ messageInput.addEventListener('keydown', (e) => {
       e.preventDefault();
       sendMessage();
       newsPanel.classList.remove('active');
+      if (Messages.classList.contains('active')) {
+        Messages.style.display = 'block';
+      }
     }
 });
 
@@ -443,6 +446,7 @@ jane.addEventListener('click', () => {
 
 sendButton.addEventListener('click', () => {
   newsPanel.classList.remove('active');
-  Messages.classList.add('active')
-  // Messages.style.display('block')
+  if (Messages.classList.contains('active')) {
+    Messages.style.display('block');
+  }
 });
