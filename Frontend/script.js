@@ -310,13 +310,13 @@ const newsButton = document.querySelector('.news');
 
 // Open news Panel
 newsButton.addEventListener('click', async () => {
-    newsPanel.classList.add('active');
-    await loadNews();
+  newsPanel.classList.add('active');
+  await loadNews();
 });
 
 // Close news Panel
 newsClose.addEventListener('click', () => {
-    newsPanel.classList.remove('active');
+  newsPanel.classList.remove('active');
 });
 
 // Close on outside click
