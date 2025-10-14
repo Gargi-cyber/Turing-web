@@ -612,28 +612,23 @@ canvas {
 .news_panel_header h2 {
     font-family: 'rale';
     color: rgba(220, 242, 249, 0.9);
-    font-size: 28px;
-    margin: 0;
+    font-size: 12px;
+    margin: 2px;
 }
 .tech img {
-    height: 5px;
-    width: 5px;
+    height: 15px;
 }
 .apple img {
-    height: 5px;
-    width: 5px;
+    height: 15px;
 }
 .tesla img {
-    height: 5px;
-    width: 5px;
+    height: 15px;
 }
 .business img {
-    height: 5px;
-    width: 5px;
+    height: 15px;
 }
 .jane img {
-    height: 5px;
-    width: 5px;
+    height: 15px;
 }
 
 .news_close {
