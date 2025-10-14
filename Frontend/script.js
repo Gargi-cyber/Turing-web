@@ -318,7 +318,9 @@ newsButton.addEventListener('click', async () => {
 
 // Close news Panel
 newsClose.addEventListener('click', () => {
-  Messages.style.display = 'block';
+  if (message) {
+    Messages.style.display = 'block';
+  }
   newsPanel.classList.remove('active');
 });
 
