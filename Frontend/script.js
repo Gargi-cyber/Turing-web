@@ -289,8 +289,9 @@ sendButton.addEventListener('click', sendMessage);
 // Send on Enter key (Shift+Enter for new line)
 messageInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendMessage();
+      e.preventDefault();
+      sendMessage();
+      newsPanel.classList.remove('active');
     }
 });
 
