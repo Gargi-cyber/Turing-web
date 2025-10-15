@@ -46,6 +46,12 @@ const stocksButton = document.querySelector('.stocks');
 // const extensionsClose = document.getElementById('extensionsClose');
 const extensionsButton = document.querySelector('.extensions');
 
+document.addEventListener('contextmenu', function (event) {
+  event.preventDefault(); // Prevents the default context menu
+  return false; // Ensures the event doesn't propagate further
+});
+
+
 function resize() {
   w = canvas.width = innerWidth;
   h = canvas.height = innerHeight;
