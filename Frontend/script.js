@@ -637,9 +637,7 @@ profilePic.addEventListener('click', () => {
 });
 
 stocksClose.addEventListener('click', () => {
-  if (stocksPanel.classList.contains('active')) {
-    stocksPanel.style.display = 'none';
-  }
+  stocksPanel.classList.remove('active');
   if (Messages.classList.contains('active')) {
     Messages.style.display = 'block';
   } else {
