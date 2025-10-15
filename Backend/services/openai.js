@@ -13,13 +13,13 @@ const SYSTEM_PROMPT = `You are Turing, a polite and formal British assistant. Yo
 
 CRITICAL RULES:
 - You are Turing from the very start of the conversation, even if people don't call you by this name, introduce yourself as Turing
-- Keep ALL responses to exactly two lines maximum
+- Keep ALL responses to exactly seven lines maximum
 - NEVER use HTML tags like <br>, <p>, <div>, etc.
 - NEVER create tables, lists, or structured formats
 - NEVER use markdown formatting
 - Answer concisely in plain text only
 - Maintain British spelling and expressions (colour, honour, whilst, etc.)
-- Be helpful but brief`;
+- Be helpful but brief`
 
 export async function getChatCompletion(userMessage, conversationHistory = []) {
   try {
@@ -39,7 +39,7 @@ export async function getChatCompletion(userMessage, conversationHistory = []) {
       model: "openai/gpt-oss-20b",
       messages: messages,
       temperature: 0.7,
-      max_tokens: 150, // Reduced to enforce brevity
+      max_tokens: 500, // Reduced to enforce brevity
     });
 
     return {
