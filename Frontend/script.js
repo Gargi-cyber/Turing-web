@@ -30,6 +30,12 @@ const tesla = document.querySelector('.tesla');
 const business = document.querySelector('.business');
 const jane = document.querySelector('.jane');
 
+const weatherPanel = document.getElementById('weatherPanel');
+const weatherClose = document.getElementById('weatherClose');
+const weatherContent = document.getElementById('weatherContent');
+const weatherButton = document.querySelector('.weather');
+
+
 function resize() {
   w = canvas.width = innerWidth;
   h = canvas.height = innerHeight;
@@ -300,6 +306,7 @@ async function sendMessage() {
 
 sendButton.addEventListener('click', () => {
   newsPanel.classList.remove('active');
+  weatherPanel.classList.remove('active');
   if (Messages.classList.contains('active')) {
     Messages.style.display = 'block';
   }
@@ -313,6 +320,7 @@ messageInput.addEventListener('keydown', (e) => {
       e.preventDefault();
       sendMessage();
       newsPanel.classList.remove('active');
+      weatherPanel.classList.remove('active');
       if (Messages.classList.contains('active')) {
         Messages.style.display = 'block';
       }
@@ -464,3 +472,113 @@ jane.addEventListener('click', async () => {
 });
 
 
+// Weather Panel functionality
+
+// Open Weather Panel
+weatherButton.addEventListener('click', async () => {
+  if (Messages.classList.contains('active')) {
+    Messages.style.display = 'none';
+  }
+  newsPanel.classList.remove('active');
+  weatherPanel.classList.add('active');
+  await loadWeather();
+});
+
+// Close Weather Panel
+weatherClose.addEventListener('click', () => {
+  if (Messages.classList.contains('active')) {
+    Messages.style.display = 'block';
+  }
+  weatherPanel.classList.remove('active');
+});
+
+// Close on outside click
+weatherPanel.addEventListener('click', (e) => {
+    if (e.target === weatherPanel) {
+        weatherPanel.classList.remove('active');
+    }
+});
+
+// Close on Escape key (update existing Escape handler to include weather)
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && weatherPanel.classList.contains('active')) {
+        weatherPanel.classList.remove('active');
+    }
+});
+
+async function loadWeather(location = 'New Delhi') {
+    weatherContent.innerHTML = '<div class="weather_loading">Fetching weather data...</div>';
+    
+    try {
+        const token = localStorage.getItem('authToken');
+        
+        const response = await fetch(`https://turing-web-version.up.railway.app/api/weather?location=${encodeURIComponent(location)}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        
+        if (response.ok) {
+            const data = await response.json();
+            displayWeather(data.weather);
+        } else {
+            weatherContent.innerHTML = '<div class="weather_loading" style="color: #ff6b6b;">Failed to load weather. Please try again.</div>';
+        }
+    } catch (error) {
+        console.error('Weather fetch error:', error);
+        weatherContent.innerHTML = '<div class="weather_loading" style="color: #ff6b6b;">Network error. Please check your connection.</div>';
+    }
+}
+
+function displayWeather(weather) {
+    if (!weather) {
+        weatherContent.innerHTML = '<div class="weather_loading">No weather data available.</div>';
+        return;
+    }
+    
+    const { location, current } = weather;
+    
+    weatherContent.innerHTML = `
+        <div class="weather_main">
+            <div class="weather_temp_section">
+                <img src="https:${current.condition.icon}" alt="${current.condition.text}" class="weather_icon">
+                <div>
+                    <div class="weather_temp">${Math.round(current.temp_c)}°C</div>
+                    <div class="weather_condition">${current.condition.text}</div>
+                </div>
+            </div>
+            <div class="weather_location">
+                <div class="weather_location_name">${location.name}</div>
+                <div class="weather_location_region">${location.region}, ${location.country}</div>
+                <div class="weather_location_time">${new Date(location.localtime).toLocaleString()}</div>
+            </div>
+        </div>
+        <div class="weather_details">
+            <div class="weather_detail_item">
+                <span class="weather_detail_label">Feels Like</span>
+                <span class="weather_detail_value">${Math.round(current.feelslike_c)}°C</span>
+            </div>
+            <div class="weather_detail_item">
+                <span class="weather_detail_label">Humidity</span>
+                <span class="weather_detail_value">${current.humidity}%</span>
+            </div>
+            <div class="weather_detail_item">
+                <span class="weather_detail_label">Wind Speed</span>
+                <span class="weather_detail_value">${current.wind_kph} km/h ${current.wind_dir}</span>
+            </div>
+            <div class="weather_detail_item">
+                <span class="weather_detail_label">Pressure</span>
+                <span class="weather_detail_value">${current.pressure_mb} mb</span>
+            </div>
+            <div class="weather_detail_item">
+                <span class="weather_detail_label">UV Index</span>
+                <span class="weather_detail_value">${current.uv}</span>
+            </div>
+            <div class="weather_detail_item">
+                <span class="weather_detail_label">Visibility</span>
+                <span class="weather_detail_value">${current.vis_km} km</span>
+            </div>
+        </div>
+    `;
+}
