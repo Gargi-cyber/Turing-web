@@ -1074,6 +1074,7 @@ canvas {
     /* filter: blur(10px); */
     border-radius: 8px;
     backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     box-shadow: rgba(0,0,0,0.25) 1px 1x 5px 2x;
 }
 .stocks_panel_header h1 {
@@ -1081,4 +1082,39 @@ canvas {
     color: rgba(220, 242, 249, 0.9);
     font-size: 28px;
     margin: 5px;
+}
+.stocks_content {
+    padding: 10px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    box-shadow: rgba(0,0,0,0.25) 1px 1x 5px 2x;
+}
+.stocks_content h1 {
+    font-family: 'rale';
+    color: rgba(220, 242, 249, 0.9);
+    font-size: 28px;
+    margin: 5px;
+}
+.stocks_close {
+    background: none;
+    border: none;
+    color: rgba(220, 242, 249, 0.6);
+    font-size: 40px;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+.stocks_close:hover {
+    color: #ff4444;
+    background: rgba(255, 68, 68, 0.1);
+    transform: rotate(90deg);
+    box-shadow: rgba(0,0,0,0.25) 1px 1px 5px 2px;
 }
