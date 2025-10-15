@@ -344,6 +344,7 @@ newsButton.addEventListener('click', async () => {
     Messages.style.display = 'none';
   }
   newsPanel.classList.add('active');
+  weatherPanel.classList.remove('active');
   currentNewsSource = 'tech';
   setActiveTab('tech');
   await loadNews('tech');
