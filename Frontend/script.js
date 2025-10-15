@@ -459,8 +459,8 @@ business.addEventListener('click', async () => {
 
 jane.addEventListener('click', async () => {
     setActiveTab('jane');
-    currentNewsSource = 'janestreet';
-    await loadNews('janestreet');
+    currentNewsSource = 'jane';
+    await loadNews('jane');
 });
 
 
