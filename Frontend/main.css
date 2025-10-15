@@ -302,14 +302,12 @@ canvas {
 }
 .profile_pic_container {
     margin: 5px 0 10px 0;
-    border: 0.2px solid rgba(220, 242, 249, 0.215);
-    box-shadow: black 1px 1px 5px 1.5px;
-    border-radius: 25%;
+    padding: 5px;
 }
 .profile_pic {
     height: 60px;
     width: 60px;
-    margin: 5px 0 10px 0;
+    margin: 15px 0 10px 0;
     border: 0.2px solid rgba(220, 242, 249, 0.215);
     box-shadow: black 1px 1px 5px 1.5px;
     border-radius: 25%;
@@ -333,6 +331,7 @@ canvas {
     border-radius: 5px;
     text-shadow: black 1px 1px 5px;
     font-size: 20px;
+    margin-bottom: 5px;
 }
 .profile_logout {
     z-index: 11;
