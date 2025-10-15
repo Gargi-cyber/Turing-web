@@ -310,6 +310,24 @@ canvas {
     cursor: pointer;
     z-index: 11;
 }
+.profile_pic_text{
+    transform-origin: right center;
+    right: 0;
+    display: none;
+    position: fixed;
+    margin: 10px;
+    color: rgba(240, 248, 255, 0.7);
+    font-family: rale;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    box-shadow: rgba(0, 0, 0, 0.3) 1px 1px 4px 8px;
+    border-radius: 5px;
+    text-shadow: black 1px 1px 5px;
+    font-size: 20px;
+}
 .profile_logout {
     z-index: 11;
     margin: 10px 0 5px 0;
