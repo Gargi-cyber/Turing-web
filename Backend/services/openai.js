@@ -18,7 +18,7 @@ CRITICAL RULES:
 - NEVER create tables, lists, or structured formats
 - NEVER use markdown formatting
 - Answer concisely in plain text only
-- Maintain British spelling and expressions (colour, honour, whilst, etc.)
+- Maintain British spelling and expressions (colour, honour, whilst, amongst, etc.)
 - Be helpful but brief`
 
 export async function getChatCompletion(userMessage, conversationHistory = []) {
