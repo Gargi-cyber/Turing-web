@@ -818,6 +818,8 @@ canvas {
     box-shadow: 0 5px 20px rgba(100, 150, 255, 0.2);
 }
 .news_article_image {
+    display: flex;
+    flex-direction: column;
     width: 160px;
     height: 200px;
     object-fit: cover;
