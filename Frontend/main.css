@@ -820,12 +820,14 @@ canvas {
     display: flex;
     flex-direction: column;
     object-fit: cover;
+    width: 320px;
+    height: 200px;
     flex-shrink: 0;
     margin-bottom: 15px;
 }
 .news_article_image img {
-    width: 320px;
-    height: 200px;
+    width: 100%;
+    height: 90%;
     border-radius: 8px;
 }
 .news_article_text {
@@ -850,6 +852,7 @@ canvas {
 }
 .news_article_meta {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     font-family: 'rale', sans-serif;
@@ -861,9 +864,11 @@ canvas {
 }
 .news_article_author {
     font-style: italic;
+    word-wrap: break-word;
 }
 .news_article_date {
     opacity: 0.7;
+    word-wrap: break-word;
 }
 
 /* Scrollbar for news articles */
