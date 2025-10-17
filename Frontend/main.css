@@ -821,7 +821,7 @@ canvas {
     flex-direction: column;
     object-fit: cover;
     width: 320px;
-    height: 200px;
+    height: auto;
     flex-shrink: 0;
     margin-bottom: 15px;
 }
