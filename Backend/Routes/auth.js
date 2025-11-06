@@ -3,9 +3,55 @@ import passport from 'passport';
 import jwt from 'jsonwebtoken';
 import db from '../db.js';
 import { config } from '../Config/env.js';
+
 const router = express.Router();
 
-// start OAuth
+// GitHub OAuth start
+router.get('/github', (req, res, next) => {
+  console.log('[AUTH] GET /auth/github called');
+  next();
+}, passport.authenticate('github', { scope: ['user:email'] }));
+
+// GitHub callback
+router.get('/github/callback', (req, res, next) => {
+  console.log('[AUTH] GET /auth/github/callback called');
+  next();
+}, passport.authenticate('github', { failureRedirect: config.frontendOrigin, session: false }), async (req, res) => {
+  console.log('[AUTH] GitHub callback succeeded, user:', req.user && req.user.id);
+  const profile = req.user;
+  
+  // GitHub email handling is slightly different
+  const email = profile.emails && profile.emails[0] && profile.emails[0].value;
+  const id = profile.id;
+
+  await db.read();
+  let user = db.data.users.find(u => u.githubId === id || u.email === email);
+  
+  if (!user) {
+    user = {
+      id: `u_${Date.now()}`,
+      githubId: id,
+      displayName: profile.displayName || profile.username,
+      email,
+      photo: profile.photos && profile.photos[0] && profile.photos[0].value,
+      createdAt: new Date().toISOString()
+    };
+    db.data.users.push(user);
+    await db.write();
+  } else {
+    user.displayName = profile.displayName || profile.username;
+    user.photo = profile.photos && profile.photos[0] && profile.photos[0].value;
+    await db.write();
+  }
+
+  // Create JWT (same as Google)
+  const payload = { sub: user.id, name: user.displayName, email: user.email };
+  const token = jwt.sign(payload, config.jwt.secret, { expiresIn: config.jwt.expiresIn });
+
+  res.redirect(`${config.frontendOrigin}/Frontend/main.html?token=${token}`);
+});
+
+// Google OAuth start
 router.get('/google', (req, res, next) => {
   console.log('[AUTH] GET /auth/google called');
   next();
