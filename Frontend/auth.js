@@ -13,3 +13,12 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "https://turing-web-version.onrender.com/auth/github";
   });
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const downloadBtn = document.getElementById("download-btn");
+  downloadBtn.addEventListener("click", () => {
+    // Redirect user to download endpoint or trigger download
+    window.location.href = "https://github.com/Shashank-Tripathi-07/Turing-An_AI_Integrated_Real-time_Assistant/archive/refs/heads/main.zip";
+  });
+});
