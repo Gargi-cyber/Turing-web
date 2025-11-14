@@ -34,9 +34,8 @@ body {
 .login-subtitle {
   font-family: rale;
   color: rgba(220, 242, 249, 0.5);
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
-
 
 .google-btn {
   display: flex;
@@ -86,6 +85,11 @@ body {
   height: 24px;
 }
 
+.download-subtitle {
+  font-family: rale;
+  color: rgba(220, 242, 249, 0.5);
+  margin: 10px 0;
+}
 
 .download-btn {
   display: flex;
