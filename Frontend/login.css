@@ -93,7 +93,7 @@ body {
 .download-subtitle {
   font-family: rale;
   color: rgba(220, 242, 249, 0.5);
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .download {
@@ -113,6 +113,7 @@ body {
   font-size: 16px;
   font-family: 'rale';
   padding: 12px 20px;
+  margin-top: 10px;
   border-radius: 8px;
   box-shadow: rgba(0,0,0,0.3) 1px 1px 10px 5px;
   cursor: pointer;
