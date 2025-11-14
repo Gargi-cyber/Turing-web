@@ -23,7 +23,7 @@ body {
 }
 .login-logo {
   height: 100px;
-  margin-bottom: 20px;
+  margin: 0;
 }
 .login-title {
   font-family: 'mile', sans-serif;
@@ -35,6 +35,11 @@ body {
   font-family: rale;
   color: rgba(220, 242, 249, 0.5);
   margin-bottom: 10px;
+}
+
+.login-btn {
+  align-items: center;
+  justify-content: center;
 }
 
 .google-btn {
