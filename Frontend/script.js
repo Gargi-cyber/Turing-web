@@ -855,3 +855,62 @@ stocksClose.addEventListener('click', () => {
   }, 300);
 });
 
+
+const countrySelect = document.getElementById('country');
+const apiUrl = 'https://restcountries.com/v3.1/all?fields=name,cca2'; // Fetch name and 2-letter country code (cca2)
+
+async function populateCountryDropdown() {
+    try {
+        // 1. Fetch data from the API using the GET method (default for fetch)
+        const response = await fetch(apiUrl, {
+            method: 'GET'
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const countriesData = await response.json();
+
+        // 2. Clear the "Loading" option
+        countrySelect.innerHTML = '';
+        
+        // Add a default placeholder option
+        const defaultOption = document.createElement('option');
+        defaultOption.value = "";
+        defaultOption.textContent = "Select a Country";
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        countrySelect.appendChild(defaultOption);
+
+
+        // 3. Process and Sort the data
+        // Extract names and codes, then sort alphabetically by common name
+        const sortedCountries = countriesData
+            .map(country => ({
+                name: country.name.common,
+                code: country.cca2
+            }))
+            .sort((a, b) => a.name.localeCompare(b.name));
+
+        // 4. Create and append <option> elements
+        sortedCountries.forEach(country => {
+            const option = document.createElement('option');
+            
+            // Set the value to the country code (good practice for backend processing)
+            option.value = country.code; 
+            
+            // Set the visible text to the country name
+            option.textContent = country.name; 
+            
+            countrySelect.appendChild(option);
+        });
+
+    } catch (error) {
+        console.error("Could not fetch country data:", error);
+        countrySelect.innerHTML = '<option value="">Failed to load countries</option>';
+    }
+}
+
+// Call the function to start populating the dropdown
+populateCountryDropdown();
