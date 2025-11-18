@@ -330,7 +330,12 @@ async function sendMessage() {
         addMessage('Failed to send message. Please check your connection.', 'error');
     }
 }
-
+sendButton.addEventListener("mouseover", ()=>{
+        sendButton.style.transform = "scale(0.98)";
+})
+sendButton.addEventListener("mouseout", ()=>{
+        sendButton.style.transform = "scale(1)";
+})
 sendButton.addEventListener('click', () => {
   stocksPanel.classList.remove('active');
   newsPanel.classList.remove('active');
