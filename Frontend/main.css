@@ -369,7 +369,7 @@ canvas {
     align-items: center;
     z-index: 10;
     border-radius: 15px;
-    background: linear-gradient( 90deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.08) );
+    background: linear-gradient( 90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.1) );
     box-shadow: rgba(0, 0, 0, 0.25) 2px 3px 10px 10px;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -385,7 +385,7 @@ canvas {
     margin: 10px;
     align-content: center;
     justify-content: center;
-    background-color: transparent;
+    background: rgba(255,255,255,0.1);
     border-radius: 50%;
     cursor: pointer;
     z-index: 11;
@@ -412,7 +412,7 @@ canvas {
     min-width: 60%;
     border-radius: 15px;
     outline: none;
-    background: linear-gradient(-90deg, rgba(0, 255, 204, 0.1) 0%, rgba(0, 255, 204, 0.02) 35%, rgba(255, 0, 132, 0.02) 35%, rgba(255, 0, 132, 0.1) 50%, rgba(255, 0, 132, 0.02) 65%, rgba(0, 68, 255, 0.02) 65%, rgba(0, 68, 255, 0.1) 100%);
+    background: rgba(255, 255, 255, 0.1);
     color: white;
     border: none;
     box-shadow: rgba(0, 0, 0, 0.25) 1px 1px 10px 5px;
