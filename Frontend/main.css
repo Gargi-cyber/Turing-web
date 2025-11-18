@@ -445,7 +445,7 @@ canvas {
     margin: 10px;
     height: 50px;
     width: 100px;
-    background-color: transparent;
+    background: rgba(255,255,255,0.1);
     border-radius: 15px;
     border: none;
     text-shadow: rgba(0, 0, 0, 0.4) 1px 1px 2px;
@@ -455,7 +455,6 @@ canvas {
     cursor: pointer;
     z-index: 10;
 }
-
 
 
 @keyframes float {
