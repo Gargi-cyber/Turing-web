@@ -2,56 +2,53 @@ export async function getTopHeadlines(country = 'in') {
   try {
     const apiKey = process.env.NEWS_API_KEY;
     
-    // Different URL patterns for different sources
-    let url;
-    if (source === 'tech') {
-      url = `https://newsdata.io/api/1/latest?apikey=${apiKey}&country=${country}`;
+    if (!apiKey) {
+      throw new Error('NEWS_API_KEY not configured');
     }
-    // else if (source === 'apple') {
-    //   url = `https://newsapi.org/v2/everything?q=apple&from=2025-10-13&to=2025-10-13&sortBy=popularity&apiKey=${apiKey}`;
-    // } else if (source === 'tesla') {
-    //   url = `https://newsapi.org/v2/everything?q=tesla&from=2025-09-14&sortBy=publishedAt&apiKey=${apiKey}`;
-    // } else if (source === 'business') {
-    //   url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${apiKey}`;
-    // } else if (source === 'jane') {
-    //   url = `https://newsapi.org/v2/everything?domains=wsj.com&apiKey=${apiKey}`;
-    // } else {
-    //   url = `https://newsapi.org/v2/top-headlines?sources=${source}&apiKey=${apiKey}`;
-    // }
+    
+    // Fetch breaking news for the selected country using NewsData.io
+    const url = `https://newsdata.io/api/1/latest?apikey=${apiKey}&country=${country}&language=en`;
+    
+    console.log(`[NEWS] Fetching breaking news for country: ${country}`);
     
     const response = await fetch(url);
     
     if (!response.ok) {
-      throw new Error(`NewsData.io error: ${response.statusText}`);
+      const errorText = await response.text();
+      throw new Error(`NewsData.io error: ${response.status} ${response.statusText} - ${errorText}`);
     }
     
     const data = await response.json();
     
-    if (data.status !== 'success') {
-      throw new Error(data.message || 'Failed to fetch news');
+    // Check for API-level errors
+    if (data.status === 'error') {
+      throw new Error(data.results?.message || 'Failed to fetch news');
     }
     
-    console.log(`[NEWS] Fetched ${data.results.length} articles for country: ${country}`);
+    if (data.status !== 'success') {
+      throw new Error('Unexpected API response status');
+    }
     
+    console.log(`[NEWS] Successfully fetched ${data.results?.length || 0} articles for country: ${country}`);
+    
+    // Transform NewsData.io response to standardized format
     return {
       success: true,
-      articles: data.results.map(article => ({
-        title: article.title,
-        description: article.description,
-        url: article.link,
-        urlToImage: article.image_url,
-        publishedAt: article.pubDate,
+      articles: (data.results || []).map(article => ({
+        title: article.title || 'No title available',
+        description: article.description || article.content || 'No description available',
+        url: article.link || '#',
+        urlToImage: article.image_url || null,
+        publishedAt: article.pubDate || new Date().toISOString(),
         author: article.creator ? article.creator.join(', ') : null,
-        source: article.source_name || article.source_id
+        source: article.source_name || article.source_id || 'Unknown Source'
       }))
     };
   } catch (error) {
-    console.error('[NEWS] Error fetching news:', error);
+    console.error('[NEWS] Error fetching news:', error.message);
     return {
       success: false,
-      error: error.message
+      error: error.message || 'Failed to fetch news articles'
     };
   }
 }
-
-
