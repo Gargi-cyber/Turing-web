@@ -3,10 +3,10 @@ export async function getTopHeadlines(country = 'in') {
     const apiKey = process.env.NEWS_API_KEY;
     
     if (!apiKey) {
+      console.error('[NEWS] NEWS_API_KEY not configured');
       throw new Error('NEWS_API_KEY not configured');
     }
     
-    // Fetch breaking news for the selected country using NewsData.io
     const url = `https://newsdata.io/api/1/latest?apikey=${apiKey}&country=${country}&language=en`;
     
     console.log(`[NEWS] Fetching breaking news for country: ${country}`);
@@ -15,23 +15,25 @@ export async function getTopHeadlines(country = 'in') {
     
     if (!response.ok) {
       const errorText = await response.text();
+      console.error(`[NEWS] API Error Response:`, errorText);
       throw new Error(`NewsData.io error: ${response.status} ${response.statusText} - ${errorText}`);
     }
     
     const data = await response.json();
     
-    // Check for API-level errors
     if (data.status === 'error') {
-      throw new Error(data.results?.message || 'Failed to fetch news');
+      console.error('[NEWS] API returned error:', data);
+      throw new Error(data.results?.message || data.message || 'Failed to fetch news');
     }
     
     if (data.status !== 'success') {
+      console.error('[NEWS] Unexpected API response status');
       throw new Error('Unexpected API response status');
     }
     
     console.log(`[NEWS] Successfully fetched ${data.results?.length || 0} articles for country: ${country}`);
     
-    // Transform NewsData.io response to standardized format
+    // FIXED: Changed 'source' to 'sourceName'
     return {
       success: true,
       articles: (data.results || []).map(article => ({
@@ -41,7 +43,7 @@ export async function getTopHeadlines(country = 'in') {
         urlToImage: article.image_url || null,
         publishedAt: article.pubDate || new Date().toISOString(),
         author: article.creator ? article.creator.join(', ') : null,
-        source: article.source_name || article.source_id || 'Unknown Source'
+        sourceName: article.source_name || article.source_id || 'Unknown Source' // CHANGED HERE
       }))
     };
   } catch (error) {
